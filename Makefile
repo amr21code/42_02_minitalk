@@ -6,7 +6,7 @@
 #    By: amr21code <a@n.de>                         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 19:17:00 by amr21code         #+#    #+#              #
-#    Updated: 2022/03/10 19:36:35 by amr21code        ###   ########.fr        #
+#    Updated: 2022/03/11 17:56:03 by amr21code        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,16 +26,18 @@ NO_COLOR    = \033[m
 # Server Files
 
 INCLUDE_SRV	= ./src_server
+INCLUDE_CLN	= ./src_client
 SRC_SRV		= ft_minitalk_server.c
-SRC_SRV_O = *.o
-OBJ_SRV		= ${SRC_SRV:$(FILE_EXTENSION)=.o}
+SRC_CLN		= ft_minitalk_client.c
+#OBJ_SRV		= ${SRC_SRV:$(FILE_EXTENSION)=.o}
 
 all: $(NAME)
 
 $(NAME): ft_printf
 	@echo "$(COM_COLOR)Compiling Server$(NO_COLOR)"
-# ar rcs $(NAME) $(SRC_SRV_O)
-	@$(CC) $(CFLAGS) $(INCLUDE_SRV)/$(SRC_SRV) -o server -L/home/pi/42_02_minitalk/ -l:ft_printf.a -l:libft.a 
+	@$(CC) $(CFLAGS) $(INCLUDE_SRV)/$(SRC_SRV) -o server -L/home/pi/42_02_minitalk/ -l:ft_printf.a -l:libft.a
+	@echo "$(COM_COLOR)Compiling Client$(NO_COLOR)"
+	@$(CC) $(CFLAGS) $(INCLUDE_CLN)/$(SRC_CLN) -o client -L/home/pi/42_02_minitalk/ -l:ft_printf.a -l:libft.a
 
 # libft:
 # 	@echo "$(COM_COLOR)Compiling LibFT$(NO_COLOR)"
