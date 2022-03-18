@@ -6,7 +6,7 @@
 /*   By: amr21code <a@n.de>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:32:27 by amr21code         #+#    #+#             */
-/*   Updated: 2022/03/18 10:05:51 by amr21code        ###   ########.fr       */
+/*   Updated: 2022/03/18 10:06:43 by amr21code        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main(int ac, char **av)
 	if (ac != 3)
 		return (1);
 	srv_pid = ft_atoi(av[1]);
-	if (srv_pid == -1)	
+	if (srv_pid == -1)
 		return (1);
 	mt_send_str(av[2], srv_pid);
 }
