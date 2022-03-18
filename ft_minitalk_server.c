@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "/home/pi/42_02_minitalk/ft_minitalk.h"
+#include "./ft_minitalk.h"
 
 int	ft_iterative_power(int nb, int power)
 {
@@ -41,11 +41,6 @@ char	ft_btoi(int *binary)
 	while (i > -1)
 	{
 		c += ft_iterative_power(2, i) * binary[i];
-		// ft_printf("\nTest:");
-		// for (int j = 0; j < 8; j++)
-		// 	ft_printf("%d", binary[j]);
-		// ft_printf("\n");
-		// ft_printf("2^%d = %d * %d + rest = %d\n", i, ft_iterative_power(2, i), binary[i],  c);
 		i--;
 	}
 	return (c);
@@ -54,24 +49,17 @@ char	ft_btoi(int *binary)
 void	mt_print_msg(int signum)
 {
 	static int	binary[8];
-	static int	i;
+	static int	bit;
 
-	if (!i)
-		i = 8;
-	i--;
+	if (!bit)
+		bit = 8;
+	bit--;
 	if (signum == SIGUSR1)
-		binary[i] = 0;
+		binary[bit] = 0;
 	else if (signum == SIGUSR2)
-		binary[i] = 1;
-	if (i == 0)
-	{
+		binary[bit] = 1;
+	if (bit == 0)
 		ft_putchar_fd(ft_btoi(binary), 1);
-		// ft_printf("%c", ft_btoi(binary));
-		// ft_printf("\nTest:");
-		// for (int j = 0; j < 8; j++)
-		// 	ft_printf("%d", binary[j]);
-		// ft_printf("\n");
-	}
 }
 
 int	main(void)

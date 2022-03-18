@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_minitalk.h"
+#include "./ft_minitalk.h"
 
 void	ft_itob(int c, int *binary)
 {
@@ -36,10 +36,6 @@ void	mt_send_str(char *str, int srv_pid)
 	while (str[i])
 	{
 		ft_itob(str[i], binary);
-		// ft_printf("\nTest:");
-		// for (int j = 0; j < 8; j++)
-		// 	ft_printf("%d", binary[j]);
-		// ft_printf("\n");
 		j = 0;
 		while (j < 8)
 		{
@@ -47,9 +43,8 @@ void	mt_send_str(char *str, int srv_pid)
 				kill(srv_pid, SIGUSR2);
 			else
 				kill(srv_pid, SIGUSR1);
-			//ft_printf("*%d*", j);
 			j++;
-			usleep(700);
+			usleep(100);
 		}
 		i++;
 	}
@@ -62,5 +57,10 @@ int	main(int ac, char **av)
 	if (ac != 3)
 		return (1);
 	srv_pid = ft_atoi(av[1]);
+	if (srv_pid == -1)	
+		return (1);
 	mt_send_str(av[2], srv_pid);
 }
+
+
+//interrupt client multiple times

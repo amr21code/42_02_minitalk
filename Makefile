@@ -35,9 +35,9 @@ all: $(NAME)
 
 $(NAME): ft_printf
 	@echo "$(COM_COLOR)Compiling Server$(NO_COLOR)"
-	@$(CC) $(CFLAGS) $(INCLUDE_SRV)/$(SRC_SRV) -o server -L/home/pi/42_02_minitalk/ -l:ft_printf.a -l:libft.a
+	@$(CC) $(CFLAGS) $(SRC_SRV) -o server -L. -lprintf -lft
 	@echo "$(COM_COLOR)Compiling Client$(NO_COLOR)"
-	@$(CC) $(CFLAGS) $(INCLUDE_CLN)/$(SRC_CLN) -o client -L/home/pi/42_02_minitalk/ -l:ft_printf.a -l:libft.a
+	@$(CC) $(CFLAGS) $(SRC_CLN) -o client -L. -lprintf -lft
 
 # libft:
 # 	@echo "$(COM_COLOR)Compiling LibFT$(NO_COLOR)"
