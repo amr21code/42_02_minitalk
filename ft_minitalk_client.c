@@ -6,7 +6,7 @@
 /*   By: amr21code <a@n.de>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:32:27 by amr21code         #+#    #+#             */
-/*   Updated: 2022/03/14 12:31:21 by amr21code        ###   ########.fr       */
+/*   Updated: 2022/03/18 10:05:51 by amr21code        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,3 @@ int	main(int ac, char **av)
 		return (1);
 	mt_send_str(av[2], srv_pid);
 }
-
-
-//interrupt client multiple times
