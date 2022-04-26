@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minitalk_server.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amr21code <a@n.de>                         +#+  +:+       +#+        */
+/*   By: anruland <anruland@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 09:24:35 by amr21code         #+#    #+#             */
-/*   Updated: 2022/03/18 10:05:46 by amr21code        ###   ########.fr       */
+/*   Updated: 2022/04/26 23:24:24 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,28 @@ char	ft_btoi(int *binary)
 void	mt_print_msg(int signum)
 {
 	static int	binary[8];
+	static int	reset;
 	static int	bit;
 
+	if (!reset)
+		reset = 0;
 	if (!bit)
 		bit = 8;
 	bit--;
 	if (signum == SIGUSR1)
+	{
+		reset++;
 		binary[bit] = 0;
+	}
 	else if (signum == SIGUSR2)
+	{
+		reset = 0;
 		binary[bit] = 1;
+	}
 	if (bit == 0)
 		ft_putchar_fd(ft_btoi(binary), 1);
+	if (reset == 8)
+		bit = 8;
 }
 
 int	main(void)
