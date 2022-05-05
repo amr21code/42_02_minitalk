@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anruland <anruland@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 19:17:00 by amr21code         #+#    #+#              #
-#    Updated: 2022/04/26 22:29:48 by anruland         ###   ########.fr        #
+#    Updated: 2022/05/05 15:56:30 by anruland         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Config
-
 NAME 	= minitalk
 CC 		= gcc
 CFLAGS	= -Werror -Wall -Wextra
+LIBS	= -L./libft/ -lft
 
 COM_COLOR   = \033[0;34m
 OBJ_COLOR   = \033[0;36m
@@ -23,51 +23,36 @@ ERROR_COLOR = \033[0;31m
 WARN_COLOR  = \033[0;33m
 NO_COLOR    = \033[m
 
-# Server Files
-
+# Files
 INCLUDE_SRV	= ./src_server
 INCLUDE_CLN	= ./src_client
 SRC_SRV		= ft_minitalk_server.c
 SRC_CLN		= ft_minitalk_client.c
-#OBJ_SRV		= ${SRC_SRV:$(FILE_EXTENSION)=.o}
 
+# Rules
 all: $(NAME)
 
-$(NAME): printf
+$(NAME): libft
 	@echo "$(COM_COLOR)Compiling Server$(NO_COLOR)"
-	@$(CC) $(CFLAGS) $(SRC_SRV) -o server -L. -lprintf -lft
+	@$(CC) $(CFLAGS) $(SRC_SRV) -o server $(LIBS)
 	@echo "$(COM_COLOR)Compiling Client$(NO_COLOR)"
-	@$(CC) $(CFLAGS) $(SRC_CLN) -o client -L. -lprintf -lft
+	@$(CC) $(CFLAGS) $(SRC_CLN) -o client $(LIBS)
 
-# libft:
+libft:
 	@echo "$(COM_COLOR)Compiling LibFT$(NO_COLOR)"
-# 	@cd ./libft/ && make re
-# 	@cp ./libft.a ../ft_printf/libftprintf.a
-# 	@cd ..
-	@cp ./libft/libft.a ./libft.a
-	@echo "$(OK_COLOR)done$(NO_COLOR)"
-
-printf: #libft
-	@echo "$(COM_COLOR)Compiling ft_printf$(NO_COLOR)"
-	@cd ./libprintf/ && make re
-	@cd ..
-	@cp ./libprintf/libftprintf.a ./libprintf.a
+	@$(MAKE) -C ./libft
 	@echo "$(OK_COLOR)done$(NO_COLOR)"
 
 clean:
 	@echo "$(COM_COLOR)Cleaning Object Files$(NO_COLOR)"
-	@/bin/rm -f
+	@$(MAKE) -C ./libft clean
 
 fclean: clean
-	@echo "$(COM_COLOR)Cleaning $(NAME)$(NO_COLOR)"
-	@/bin/rm -f $(NAME)
-
-# aclean: fclean
-# 	@echo "$(COM_COLOR)Cleaning LibFT$(NO_COLOR)"
-# 	@cd ./libft/ && make fclean
-# 	@cd ..
-# 	@echo "$(COM_COLOR)Cleaning ft_printf$(NO_COLOR)"
-# 	@cd ./ft_printf/ && make fclean
-# 	@cd ..
+	@echo "$(COM_COLOR)Cleaning all $(NO_COLOR)"
+	@/bin/rm -f server
+	@/bin/rm -f client
+	@$(MAKE) -C ./libft fclean
 
 re: fclean all
+
+.PHONY: libft clean fclean re $(NAME) all
