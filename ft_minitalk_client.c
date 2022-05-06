@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:32:27 by amr21code         #+#    #+#             */
-/*   Updated: 2022/05/06 12:49:41 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/06 14:09:43 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	mt_send_str(char *str, int srv_pid)
 			else
 				kill(srv_pid, SIGUSR1);
 			j++;
-			usleep(600);
+			usleep(200);
 		}
 		i++;
 	}
@@ -61,6 +61,5 @@ int	main(int ac, char **av)
 	srv_pid = ft_atoi(av[1]);
 	if (srv_pid == -1)
 		return (1);
-	ft_putstr_fd(av[2], 1);
 	mt_send_str(av[2], srv_pid);
 }
