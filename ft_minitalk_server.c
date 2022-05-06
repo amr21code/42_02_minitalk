@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 09:24:35 by amr21code         #+#    #+#             */
-/*   Updated: 2022/05/05 14:30:48 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/06 13:14:40 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,28 +49,24 @@ char	ft_btoi(int *binary)
 void	mt_print_msg(int signum)
 {
 	static int	binary[8];
-	// static int	reset;
 	static int	bit;
+	char		c;
 
-	// if (!reset)
-	// 	reset = 0;
 	if (!bit)
 		bit = 8;
 	bit--;
 	if (signum == SIGUSR1)
-	{
-		// reset++;
 		binary[bit] = 0;
-	}
 	else if (signum == SIGUSR2)
-	{
-		// reset = 0;
 		binary[bit] = 1;
-	}
 	if (bit == 0)
-		ft_putchar_fd(ft_btoi(binary), 1);
-	// if (reset == 8)
-	// 	bit = 8;
+	{
+		c = ft_btoi(binary);
+		if (c == '\0')
+			ft_putchar_fd('\n', 1);
+		else
+			ft_putchar_fd(c, 1);
+	}
 }
 
 int	main(void)
