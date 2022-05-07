@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 09:24:35 by amr21code         #+#    #+#             */
-/*   Updated: 2022/05/06 13:14:40 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/07 16:45:46 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,22 @@ char	ft_btoi(int *binary)
 	return (c);
 }
 
+// int	mt_check_reset(int signum)
+// {
+// 	static int	count_reset;
+
+// 	if (!count_reset)
+// 		count_reset = 8;
+// 	if (signum == SIGUSR1)
+// 		count_reset--;
+// 	else if (signum == SIGUSR2)
+// 		count_reset = 8;
+// 	if (count_reset == 0)
+// 		return (1);
+// 	else
+// 		return (0);
+// }
+
 void	mt_print_msg(int signum)
 {
 	static int	binary[8];
@@ -59,13 +75,14 @@ void	mt_print_msg(int signum)
 		binary[bit] = 0;
 	else if (signum == SIGUSR2)
 		binary[bit] = 1;
+	c = ft_btoi(binary);
 	if (bit == 0)
 	{
-		c = ft_btoi(binary);
 		if (c == '\0')
 			ft_putchar_fd('\n', 1);
-		else
+		else if (ft_isprint(c))
 			ft_putchar_fd(c, 1);
+		bit = 8;
 	}
 }
 
